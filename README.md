@@ -28,6 +28,12 @@ response = requests.get('http://co2-sensor-pi.local:5000')
 pprint.pprint(response.json())
 ```
 
+```sh
+#!/usr/bin/env bash
+set -eu
+curl https://co2-sensor-pi.local:5000
+```
+
 ## License
 
 (C) 2019 Tiryoh
