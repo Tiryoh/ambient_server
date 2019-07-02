@@ -4,7 +4,18 @@
 
 * [Tiryoh/ambient_logger](https://github.com/Tiryoh/ambient_logger)
 
-## Sample
+## Usage
+
+Install the requirements first.
+
+After that, just run the followings:
+```sh
+./sensor_server.py
+```
+
+## Samples to get data from this server
+
+Replace `co2-sensor-pi` to the hostname of the server.
 
 ```python
 #!/usr/bin/env python
