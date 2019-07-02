@@ -24,15 +24,24 @@ Replace `co2-sensor-pi` to the hostname of the server.
 import pprint
 import requests
 
-response = requests.get('http://co2-sensor-pi.local:5000')
+response = requests.get('http://co2-sensor-pi.local:5000/api/v1/ambient')
 pprint.pprint(response.json())
 ```
 
 ```sh
 #!/usr/bin/env bash
 set -eu
-curl https://co2-sensor-pi.local:5000
+curl -Ss http://co2-sensor-pi.local:5000/api/v1/ambient
 ```
+
+## API
+
+### `/api/v1/ambient`
+
+* URL
+  * `/api/v1/ambient`
+* Return-Type
+  * `application/json`
 
 ## License
 
