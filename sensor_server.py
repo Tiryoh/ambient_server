@@ -6,7 +6,7 @@ import argparse
 import urllib.parse as urlparse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 
 
 def get_co2_sensor_data():
@@ -50,7 +50,7 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(body.encode("UTF-8"))
         else:
-            body = "API Not Found. See https://github.com/Tiryoh/ambient_server/README.md."
+            body = "API Not Found. See https://github.com/Tiryoh/ambient_server/blob/master/README.md#api"
             self.send_response(404)
             self.send_header("Content-type", "text/plain")
             self.send_header("Content-length", len(body))
