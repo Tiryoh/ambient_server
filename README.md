@@ -43,6 +43,13 @@ curl -Ss http://co2-sensor-pi.local:5000/api/v1/ambient
 * Return-Type
   * `application/json`
 
+### `/api/v1/thi`
+
+* URL
+  * `/api/v1/thi`
+* Return-Type
+  * `application/json`
+
 ## License
 
 (C) 2019 Tiryoh
