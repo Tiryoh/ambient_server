@@ -42,6 +42,8 @@ curl -Ss http://co2-sensor-pi.local:5000/api/v1/ambient
   * `/api/v1/ambient`
 * Return-Type
   * `application/json`
+* Example
+  * `{"timestamp": "2019-07-24T23:56:11+0900", "ambient": {"co2": 742, "humidity": 54, "temperature": 27}}`
 
 ### `/api/v1/thi`
 
@@ -49,6 +51,8 @@ curl -Ss http://co2-sensor-pi.local:5000/api/v1/ambient
   * `/api/v1/thi`
 * Return-Type
   * `application/json`
+* Example
+  * `{"timestamp": "2019-07-24T23:56:11+0900", "thi": 74}`
 
 ## License
 
