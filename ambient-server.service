@@ -1,0 +1,14 @@
+[Unit]
+Description=ambient data server
+After=network.target
+
+[Service]
+User=pi
+Type=simple
+Restart=yes
+ExecStart=/usr/bin/python3 /home/pi/ambient_server/sensor_server.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
