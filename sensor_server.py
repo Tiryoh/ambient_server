@@ -79,9 +79,14 @@ def main():
     parser.add_argument("--version", action="version", version="ambient_server v" + VERSION)
     args = parser.parse_args()
 
-    server = HTTPServer(("", args.port), JsonResponsehandler)
-    print("ambient_server v" + VERSION + " running on port " + str(args.port))
-    server.serve_forever()
+    try:
+        server = HTTPServer(("", args.port), JsonResponsehandler)
+        print("ambient_server v" + VERSION +
+              " running on port " + str(args.port))
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print(" ^C entered, stopping web server....")
+        server.socket.close()
 
 
 if __name__ == '__main__':
