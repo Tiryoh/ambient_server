@@ -50,39 +50,61 @@ class JsonResponseHandler(BaseHTTPRequestHandler):
         uri_arg = urlparse.parse_qs(urlparse.urlparse(
             uri).query, keep_blank_values=True)
         if uri == "/api/v1/ambient":
-            sensor_dict = {
-                "ambient": {
-                    "co2": get_co2_sensor_data(),
-                    "temperature": get_temp_sensor_data(),
-                    "humidity": get_hum_sensor_data(),
-                },
-                "timestamp": get_sensor_timestamp()
-            }
-            body = json.dumps(sensor_dict)
-            print(body)
-            self.send_response(200)
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Methods", "*")
-            self.send_header("Access-Control-Allow-Headers", "*")
-            self.send_header("Content-type", "application/json")
-            self.send_header("Content-length", len(body))
-            self.end_headers()
-            self.wfile.write(body.encode("UTF-8"))
+            try:
+                sensor_dict = {
+                    "ambient": {
+                        "co2": get_co2_sensor_data(),
+                        "temperature": get_temp_sensor_data(),
+                        "humidity": get_hum_sensor_data(),
+                    },
+                    "timestamp": get_sensor_timestamp()
+                }
+                body = json.dumps(sensor_dict)
+                print(body)
+                self.send_response(200)
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Access-Control-Allow-Methods", "*")
+                self.send_header("Access-Control-Allow-Headers", "*")
+                self.send_header("Content-type", "application/json")
+                self.send_header("Content-length", len(body))
+                self.end_headers()
+                self.wfile.write(body.encode("UTF-8"))
+            except:
+                body = "Internal Server Error"
+                self.send_response(500)
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Access-Control-Allow-Methods", "*")
+                self.send_header("Access-Control-Allow-Headers", "*")
+                self.send_header("Content-type", "text/plain")
+                self.send_header("Content-length", len(body))
+                self.end_headers()
+                self.wfile.write(body.encode("UTF-8"))
         elif uri == "/api/v1/thi":
-            sensor_dict = {
-                "thi": calc_thi(get_temp_sensor_data(), get_hum_sensor_data()),
-                "timestamp": get_sensor_timestamp()
-            }
-            body = json.dumps(sensor_dict)
-            print(body)
-            self.send_response(200)
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Methods", "*")
-            self.send_header("Access-Control-Allow-Headers", "*")
-            self.send_header("Content-type", "application/json")
-            self.send_header("Content-length", len(body))
-            self.end_headers()
-            self.wfile.write(body.encode("UTF-8"))
+            try:
+                sensor_dict = {
+                    "thi": calc_thi(get_temp_sensor_data(), get_hum_sensor_data()),
+                    "timestamp": get_sensor_timestamp()
+                }
+                body = json.dumps(sensor_dict)
+                print(body)
+                self.send_response(200)
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Access-Control-Allow-Methods", "*")
+                self.send_header("Access-Control-Allow-Headers", "*")
+                self.send_header("Content-type", "application/json")
+                self.send_header("Content-length", len(body))
+                self.end_headers()
+                self.wfile.write(body.encode("UTF-8"))
+            except:
+                body = "Internal Server Error"
+                self.send_response(500)
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Access-Control-Allow-Methods", "*")
+                self.send_header("Access-Control-Allow-Headers", "*")
+                self.send_header("Content-type", "text/plain")
+                self.send_header("Content-length", len(body))
+                self.end_headers()
+                self.wfile.write(body.encode("UTF-8"))
         else:
             body = "API Not Found.\nSee https://github.com/Tiryoh/ambient_server/blob/master/README.md#api\n"
             self.send_response(404)
