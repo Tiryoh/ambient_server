@@ -6,7 +6,7 @@ import argparse
 import urllib.parse as urlparse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 
 def get_co2_sensor_data():
