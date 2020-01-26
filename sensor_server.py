@@ -38,6 +38,13 @@ class JsonResponseHandler(BaseHTTPRequestHandler):
     def __init__(self, *args):
         BaseHTTPRequestHandler.__init__(self, *args)
 
+    def do_HEAD(self):
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "*")
+        self.send_header("Access-Control-Allow-Headers", "*")
+        self.end_headers()
+
     def do_GET(self):
         uri = self.path
         uri_arg = urlparse.parse_qs(urlparse.urlparse(
@@ -54,6 +61,9 @@ class JsonResponseHandler(BaseHTTPRequestHandler):
             body = json.dumps(sensor_dict)
             print(body)
             self.send_response(200)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "*")
+            self.send_header("Access-Control-Allow-Headers", "*")
             self.send_header("Content-type", "application/json")
             self.send_header("Content-length", len(body))
             self.end_headers()
@@ -66,6 +76,9 @@ class JsonResponseHandler(BaseHTTPRequestHandler):
             body = json.dumps(sensor_dict)
             print(body)
             self.send_response(200)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "*")
+            self.send_header("Access-Control-Allow-Headers", "*")
             self.send_header("Content-type", "application/json")
             self.send_header("Content-length", len(body))
             self.end_headers()
@@ -73,6 +86,9 @@ class JsonResponseHandler(BaseHTTPRequestHandler):
         else:
             body = "API Not Found.\nSee https://github.com/Tiryoh/ambient_server/blob/master/README.md#api\n"
             self.send_response(404)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "*")
+            self.send_header("Access-Control-Allow-Headers", "*")
             self.send_header("Content-type", "text/plain")
             self.send_header("Content-length", len(body))
             self.end_headers()
