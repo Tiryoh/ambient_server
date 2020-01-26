@@ -34,7 +34,7 @@ def calc_thi(temperature, humidity):
                humidity * (0.99 * temperature - 14.3) + 46.3)
 
 
-class JsonResponsehandler(BaseHTTPRequestHandler):
+class JsonResponseHandler(BaseHTTPRequestHandler):
     def __init__(self, *args):
         BaseHTTPRequestHandler.__init__(self, *args)
 
@@ -89,7 +89,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        server = HTTPServer(("", args.port), JsonResponsehandler)
+        server = HTTPServer(("", args.port), JsonResponseHandler)
         print("ambient_server v" + VERSION +
               " running on port " + str(args.port))
         server.serve_forever()
