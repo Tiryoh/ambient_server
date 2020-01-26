@@ -13,20 +13,24 @@ def get_co2_sensor_data():
     with open('/dev/shm/logger_co2', 'r') as f:
         return int(f.readline())
 
+
 def get_temp_sensor_data():
     with open('/dev/shm/logger_temp', 'r') as f:
         return int(f.readline())
+
 
 def get_hum_sensor_data():
     with open('/dev/shm/logger_hum', 'r') as f:
         return int(f.readline())
 
+
 def get_sensor_timestamp():
     with open('/dev/shm/logger_timestamp', 'r') as f:
         return f.readline().strip()
 
+
 def calc_thi(temperature, humidity):
-    return int(0.81 * temperature + 0.01 * \
+    return int(0.81 * temperature + 0.01 *
                humidity * (0.99 * temperature - 14.3) + 46.3)
 
 
@@ -36,7 +40,8 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         uri = self.path
-        uri_arg = urlparse.parse_qs(urlparse.urlparse(uri).query, keep_blank_values=True)
+        uri_arg = urlparse.parse_qs(urlparse.urlparse(
+            uri).query, keep_blank_values=True)
         if uri == "/api/v1/ambient":
             sensor_dict = {
                 "ambient": {
@@ -73,10 +78,14 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(body.encode("UTF-8"))
 
+
 def main():
-    parser = argparse.ArgumentParser(description="usage:set JSON responce server port e.g.) '--port 5000' or '-p 5000'")
-    parser.add_argument("-p", "--port", type=int, default=5000, help="define TCP port")
-    parser.add_argument("--version", action="version", version="ambient_server v" + VERSION)
+    parser = argparse.ArgumentParser(
+        description="usage:set JSON responce server port e.g.) '--port 5000' or '-p 5000'")
+    parser.add_argument("-p", "--port", type=int,
+                        default=5000, help="define TCP port")
+    parser.add_argument("--version", action="version",
+                        version="ambient_server v" + VERSION)
     args = parser.parse_args()
 
     try:
